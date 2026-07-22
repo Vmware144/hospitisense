@@ -44,7 +44,7 @@ export default function Dashboard() {
         </Card>
 
         {/* AI Daily Brief */}
-        <Card style={{ borderColor: "#22c55e33", background: "linear-gradient(135deg, #081a0e 0%, var(--bg-card) 100%)" }}>
+        <Card style={{ borderColor: "var(--accent-glow)", background: "linear-gradient(135deg, var(--bg-card) 0%, var(--accent-bg) 100%)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
             <div style={{
               width: 34, height: 34, borderRadius: 10,
@@ -66,7 +66,7 @@ export default function Dashboard() {
           ].map((line, i) => (
             <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 8 }}>
               <span style={{ color: "var(--accent)", fontSize: 14, marginTop: 1, flexShrink: 0 }}>–</span>
-              <span style={{ color: "#c6f0d6", fontSize: 13, lineHeight: 1.6 }}>{line}</span>
+              <span style={{ color: "var(--text-primary)", fontSize: 13, lineHeight: 1.6 }}>{line}</span>
             </div>
           ))}
         </Card>
