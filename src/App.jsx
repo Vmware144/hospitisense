@@ -19,11 +19,7 @@ import SmartResponder from "./screens/SmartResponder.jsx";
 import Reports        from "./screens/Reports.jsx";
 import Settings       from "./screens/Settings.jsx";
 
-// Font import via style injection
-const FONT_LINK = document.createElement("link");
-FONT_LINK.rel  = "stylesheet";
-FONT_LINK.href = "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap";
-document.head.appendChild(FONT_LINK);
+
 
 const SCREENS = {
   dashboard:   Dashboard,

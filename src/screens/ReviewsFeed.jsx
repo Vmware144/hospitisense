@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, LiveBadge, PriorityBadge } from "../components/UI.jsx";
 import { useReviews } from "../context/ReviewsContext.jsx";
 import { SENTIMENT_COLOR, PRIORITY_COLOR } from "../utils/helpers.js";
@@ -14,17 +14,26 @@ export default function ReviewsFeed() {
   const [filter, setFilter]     = useState({ sentiment: "All", dept: "All", priority: "All" });
   const [expanded, setExpanded] = useState(null);
 
-  const filtered = reviews.filter(r =>
-    (filter.sentiment === "All" || r.sentiment === filter.sentiment) &&
-    (filter.dept === "All"      || r.department === filter.dept) &&
-    (filter.priority === "All"  || r.priority === filter.priority)
-  );
+  const filtered = useMemo(() => {
+    return reviews.filter(r =>
+      (filter.sentiment === "All" || r.sentiment === filter.sentiment) &&
+      (filter.dept === "All"      || r.department === filter.dept) &&
+      (filter.priority === "All"  || r.priority === filter.priority)
+    );
+  }, [reviews, filter]);
 
-  const counts = {
-    positive: reviews.filter(r => r.sentiment === "Positive").length,
-    negative: reviews.filter(r => r.sentiment === "Negative").length,
-    high:     reviews.filter(r => r.priority === "HIGH").length,
-  };
+  const counts = useMemo(() => {
+    let positive = 0;
+    let negative = 0;
+    let high = 0;
+    for (let i = 0; i < reviews.length; i++) {
+      const r = reviews[i];
+      if (r.sentiment === "Positive") positive++;
+      else if (r.sentiment === "Negative") negative++;
+      if (r.priority === "HIGH") high++;
+    }
+    return { positive, negative, high };
+  }, [reviews]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 14, height: "100%", animation: "fadeSlideIn 0.35s ease" }}>

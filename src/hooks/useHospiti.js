@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { INITIAL_REVIEWS, LIVE_REVIEW_POOL } from "../data/mockData.js";
 import { generateTrendData, randomRoom } from "../utils/helpers.js";
 
@@ -9,15 +9,20 @@ export function useLiveScore(initial = 78, intervalMs = 3000) {
   const [pulsing, setPulse] = useState(false);
 
   useEffect(() => {
+    let pulseT;
     const t = setInterval(() => {
       setScore(s => {
         const next = Math.min(100, Math.max(0, s + (Math.random() - 0.48) * 1.5));
         return Math.round(next * 10) / 10;
       });
       setPulse(true);
-      setTimeout(() => setPulse(false), 600);
+      clearTimeout(pulseT);
+      pulseT = setTimeout(() => setPulse(false), 600);
     }, intervalMs);
-    return () => clearInterval(t);
+    return () => {
+      clearInterval(t);
+      clearTimeout(pulseT);
+    };
   }, [intervalMs]);
 
   return { score, pulsing };
@@ -26,8 +31,7 @@ export function useLiveScore(initial = 78, intervalMs = 3000) {
 //  useTrendData 
 // Returns memoised generated trend data
 export function useTrendData(points = 24, base = 68, variance = 14) {
-  const [data] = useState(() => generateTrendData(points, base, variance));
-  return data;
+  return useMemo(() => generateTrendData(points, base, variance), [points, base, variance]);
 }
 
 //  useLiveReviews 

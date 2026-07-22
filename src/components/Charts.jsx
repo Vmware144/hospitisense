@@ -33,7 +33,7 @@ export function MiniLineChart({ data, color = "#22c55e", height = 80, showArea =
 
 export function BarChart({ data, color = "#22c55e", height = 120, altColor }) {
   const W   = 400;
-  const max = Math.max(...data.map(d => d.v), 1);
+  const max = useMemo(() => Math.max(...data.map(d => d.v), 1), [data]);
   const barW = W / data.length - 6;
 
   return (

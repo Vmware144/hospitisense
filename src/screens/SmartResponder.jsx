@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, Button, AILabel, PriorityBadge } from "../components/UI.jsx";
 import { useReviews } from "../context/ReviewsContext.jsx";
 import { callAI, SENTIMENT_COLOR, PRIORITY_COLOR } from "../utils/helpers.js";
@@ -21,11 +21,15 @@ export default function SmartResponder({ apiKey }) {
     }
   }, [reviews]);
 
-  const filteredReviews = filter === "All"
-    ? reviews
-    : reviews.filter(r => r.sentiment === filter);
+  const filteredReviews = useMemo(() => {
+    return filter === "All"
+      ? reviews
+      : reviews.filter(r => r.sentiment === filter);
+  }, [reviews, filter]);
 
-  const selectedReview = reviews.find(r => r.id === selectedId) || reviews[0];
+  const selectedReview = useMemo(() => {
+    return reviews.find(r => r.id === selectedId) || reviews[0];
+  }, [reviews, selectedId]);
 
   const selectReview = (r) => {
     setSelectedId(r.id);
