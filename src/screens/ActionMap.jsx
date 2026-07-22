@@ -133,7 +133,7 @@ export default function ActionMap() {
                 <div style={{
                   background: "var(--accent-bg)", border: "1px solid var(--accent-glow)",
                   borderRadius: 10, padding: 14,
-                  fontSize: 13, color: "#c6f0d6", lineHeight: 1.7,
+                  fontSize: 13, color: "var(--text-primary)", lineHeight: 1.7,
                 }}>
                   <span style={{ color: "var(--accent)", marginRight: 6 }}>✦</span>
                   {selected.action}
