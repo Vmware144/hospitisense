@@ -171,8 +171,8 @@ export default function Settings({ apiKey, setApiKey }) {
         </Card>
       </div>
 
-      {/*  Row 2: Privacy Controls + API Key + About  */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, alignItems: "start" }}>
+      {/*  Row 2: Privacy Controls + About  */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16 }}>
 
         {/* Privacy Controls */}
         <Card>
@@ -193,40 +193,18 @@ export default function Settings({ apiKey, setApiKey }) {
           ))}
         </Card>
 
-        {/* Gemini API Key */}
-        <Card>
-          <SectionHead icon="🔑" title="Gemini API Key" sub="AI assistant integration" />
-          <div style={{ marginBottom: 14 }}>
-            <div style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "var(--font-mono)", letterSpacing: 1, marginBottom: 4, textTransform: "uppercase" }}>
-              API Key
-            </div>
-            <input
-              type="password"
-              value={apiKey}
-              onChange={e => setApiKey(e.target.value)}
-              placeholder="Paste Gemini API Key here..."
-              style={{ width: "100%", padding: "9px 12px", borderRadius: 8, fontSize: 13, boxSizing: "border-box" }}
-            />
-          </div>
-          <div style={{ padding: "10px 12px", background: "var(--bg-elevated)", borderRadius: 8, fontSize: 11, color: "var(--text-muted)", lineHeight: 1.6 }}>
-            🔑 Enter your Google AI Studio API Key. It is stored in-memory during your session.
-          </div>
-        </Card>
+        <div style={{ textAlign: "right" }}>
+      <div style={{
+        fontSize: 30,
+        fontWeight: 800,
+        fontFamily: "var(--font-display)",
+        color: "var(--text-primary)",
+      }}>
+        <span style={{ color: "var(--accent)" }}>Hospiti</span>Sense
+      </div>
+    </div>
 
-        <div style={{ textAlign: "right", alignSelf: "end", padding: "10px 0" }}>
-          <div style={{
-            fontSize: 30,
-            fontWeight: 800,
-            fontFamily: "var(--font-display)",
-            color: "var(--text-primary)",
-          }}>
-            <span style={{ color: "var(--accent)" }}>Hospiti</span>Sense
-          </div>
-          <div style={{ fontSize: 11, color: "var(--text-muted)", fontFamily: "var(--font-mono)", marginTop: 4 }}>
-            v1.0.0 · Stable Release
-          </div>
-        </div>
-
+        
       </div>
     </div>
   );
